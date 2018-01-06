@@ -64,13 +64,22 @@ app.get("/getinfo/:username", function(req, res) {
 
   const extractUserInfo = object => {
     const objectPath = object.entry_data.ProfilePage[0].user;
+
+    let bio = "";
+    if (
+      typeof objectPath.biography !== "undefined" ||
+      objectPath.biography !== null
+    ) {
+      bio = objectPath.biography.toString();
+    }
+
     const userInfo = {
       id: objectPath.id,
       fullName: objectPath.full_name,
       userName: objectPath.username,
       follows: objectPath.follows.count,
       followedBy: objectPath.followed_by.count,
-      bio: objectPath.biography.toString(),
+      bio: bio,
       totalMedia: objectPath.media.count
     };
 

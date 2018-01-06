@@ -4,11 +4,19 @@ const R = require("ramda");
 const express = require("express");
 const app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.get("/getinfo/:username", function(req, res) {
   const userName = req.params.username;
   const options = {
     uri: `https://www.instagram.com/${userName}`
-    //uri: "https://www.instagram.com/explore/tags/ichbingntm2018/"
   };
 
   getProfileScriptData = options => {
@@ -83,7 +91,7 @@ app.get("/getinfo/:username", function(req, res) {
     });
 
     const result = {
-      user: extractUserInfo(data),
+      ...extractUserInfo(data),
       amount: counter,
       like: likeCount,
       comments: commentsCount,

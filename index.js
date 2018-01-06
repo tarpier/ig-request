@@ -102,6 +102,8 @@ app.get("/getinfo/:username", function(req, res) {
   });
 });
 
-app.listen(3500, function() {
-  console.log("Example app listening on port 3500!");
+app.listen(process.env.PORT || 3500, function() {
+  console.log(
+    "Example app listening on port " + process.env.PORT || 3500 + "!"
+  );
 });

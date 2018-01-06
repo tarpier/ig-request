@@ -13,6 +13,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get("/", function(req, res) {
+  res.send("nothing to see here");
+});
+
 app.get("/getinfo/:username", function(req, res) {
   const userName = req.params.username;
   const options = {
@@ -74,11 +78,6 @@ app.get("/getinfo/:username", function(req, res) {
   };
 
   getProfileScriptData(options).then(data => {
-    /* const profile = {
-    user: extractUserInfo(data),
-    media: extractMediaInfo(data)
-  }; */
-
     let likeCount = 0;
     let commentsCount = 0;
     let counter = 0;
@@ -99,7 +98,7 @@ app.get("/getinfo/:username", function(req, res) {
     };
 
     res.send(result);
-    console.log(result);
+    console.log("scrape successful");
   });
 });
 

@@ -3,10 +3,6 @@ const cheerio = require("cheerio");
 const R = require("ramda");
 const express = require("express");
 const app = express();
-const path = require("path");
-const bodyParser = require("body-parser");
-const mongodb = require("mongodb");
-const ObjectID = mongodb.ObjectID;
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -17,8 +13,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(bodyParser.json());
-
 app.get("/", function(req, res) {
   res.send("nothing to see here");
 });
@@ -28,19 +22,6 @@ app.get("/getinfo/:username", function(req, res) {
   const options = {
     uri: `https://www.instagram.com/${userName}`
   };
-
-  const db;
-
-  mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
-  
-    // Save database object from the callback for reuse.
-    db = database;
-    console.log("Database connection ready");
-  
 
   getProfileScriptData = options => {
     return new Promise((resolve, reject) => {
@@ -83,11 +64,6 @@ app.get("/getinfo/:username", function(req, res) {
 
   const extractUserInfo = object => {
     const objectPath = object.entry_data.ProfilePage[0].user;
-
-    //check if scraping choked
-    if (typeof objectPath === "undefined" || objectPath === null) {
-      res.send("Nope this user does not exist");
-    }
 
     let bio = "";
     if (

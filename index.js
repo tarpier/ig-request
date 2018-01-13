@@ -106,13 +106,34 @@ app.get("/getinfo/:username", function(req, res) {
       media: mediaData
     };
 
+    writeToDatabase(result);
     res.send(result);
     console.log("scrape successful");
   });
 });
 
-app.listen(process.env.PORT || 3500, function() {
-  console.log(
-    "Example app listening on port " + process.env.PORT || 3500 + "!"
-  );
-});
+writeToDatabase = resultObj => {
+  const Profile = require("./models/Profile");
+
+  const newProfile = Profile({
+    id: resultObj.id,
+    fullName: resultObj.fullName,
+    userName: resultObj.userName,
+    follows: resultObj.follows,
+    followedBy: resultObj.followedBy,
+    bio: resultObj.bio,
+    totalMedia: resultObj.totalMedia,
+    amount: resultObj.amount,
+    like: resultObj.like,
+    comments: resultObj.comments,
+    media: resultObj.media
+  });
+
+  newProfile.save(err => {
+    if (err) throw err;
+
+    console.log("result logged");
+  });
+};
+
+module.exports = app;

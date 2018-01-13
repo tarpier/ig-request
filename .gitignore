@@ -4,6 +4,9 @@ node_modules
 test.js
 app.js
 
+# Enviroments
+*.env
+
 # misc
 .DS_Store
 .env.local

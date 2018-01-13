@@ -1,4 +1,4 @@
-web: node index.js
+web: node start.js
 
 # test start
 $ foreman start

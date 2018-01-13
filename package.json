@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node start.js",
+    "dev": "nodemon start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,8 @@
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
     "mongodb": "^3.0.1",
+    "mongoose": "^4.13.9",
+    "nodemon": "^1.14.11",
     "path": "^0.12.7",
     "ramda": "^0.25.0",
     "request": "^2.83.0",

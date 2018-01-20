@@ -1,4 +1,4 @@
-//const Profile = require("../models/Profile");
+const Profile = require("../models/Profile");
 
 writeToDatabase = resultObj => {
   const newProfile = Profile({
@@ -21,5 +21,4 @@ writeToDatabase = resultObj => {
     console.log("result logged");
   });
 };
-
 module.exports = writeToDatabase;

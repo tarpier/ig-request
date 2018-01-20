@@ -219,8 +219,8 @@ app.post("/authenticate", function(req, res) {
 /* app.get("/setup", function(req, res) {
   // create a sample user
   var nick = new User({
-    name: "Nick Cerminara",
-    password: "password",
+    name: "Peter Pan",
+    password: "io98HcnOdP980",
     admin: true
   });
 

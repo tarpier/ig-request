@@ -5,13 +5,12 @@ mongoose.connect(mongoDB, {
   useMongoClient: true
 });
 
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 //import models
 //require("./models/Profile");
-
 
 const app = require("./index.js");
 app.listen(process.env.PORT || 3500, function() {

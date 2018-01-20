@@ -10,7 +10,8 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 //import models
-require("./models/Profile");
+//require("./models/Profile");
+
 
 const app = require("./index.js");
 app.listen(process.env.PORT || 3500, function() {

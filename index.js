@@ -161,7 +161,7 @@ apiRoutes.get("/getinfo/:username", function(req, res) {
       media: mediaData
     };
 
-    //writeToDatabase(result);
+    writeToDatabase(result);
     res.send(result);
     console.log("scrape successful");
   });

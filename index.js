@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
 const writeToDatabase = require("./helpers/writeToDatabase");
 const User = require("./models/User");
+const Profile = require("./models/Profile");
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -69,6 +70,18 @@ apiRoutes.get("/", function(req, res) {
 apiRoutes.get("/users", function(req, res) {
   User.find({}, (err, users) => {
     res.json(users);
+  });
+});
+
+app.get("/", function(req, res) {
+  res.json({ message: "nothing to see here" });
+});
+
+apiRoutes.get("/profile/:username", function(req, res) {
+  const userName = req.params.username;
+
+  Profile.find({ userName: userName }, (err, profiles) => {
+    err ? console.error(err) : res.json(profiles);
   });
 });
 
@@ -161,7 +174,7 @@ apiRoutes.get("/getinfo/:username", function(req, res) {
       media: mediaData
     };
 
-    writeToDatabase(result);
+    //process.env.WRITETODB && writeToDatabase(result);
     res.send(result);
     console.log("scrape successful");
   });
@@ -170,9 +183,6 @@ apiRoutes.get("/getinfo/:username", function(req, res) {
 app.use("/api", apiRoutes);
 
 // UNPROTECTED PUBLIC ROUTES ----------------
-app.get("/", function(req, res) {
-  res.json({ message: "nothing to see here" });
-});
 
 app.post("/authenticate", function(req, res) {
   // find the user
